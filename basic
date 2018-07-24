@@ -1,0 +1,21 @@
+!定义集合及变量; 
+sets: 
+wu/1..4/:w,v,p;
+cang/1..3/:WET,VOL;
+link(wu,cang):x; 
+endsets 
+!对已知变量赋值; 
+data: 
+WET=10,16,8;!三个仓库最大载重;
+VOL=6800,8700,5300;!三个仓库最大容积;
+w=18,15,23,12; !货物的重量;
+v=480,650, 580,390; !货物的空间;
+p=3100,3800,3500,2850;!货物的利润;
+enddata 
+max=@sum(wu(i):p(i)*@sum(cang(j):x(i,j)));
+@for(wu(i):@sum(cang(j):x(i,j))<w(i)); 
+@for(cang(j):@sum(wu(i):x(i,j))<WET(j));
+@for(cang(j):@sum(wu(i):v(i)*x(i,j))<VOL(j));
+@for(cang(j):@for(cang(k)|k #GT# j:@sum(wu(i):x(i,j)/WET(j))=@sum(wu(i):x(i,k)/WET(k))) );
+!#GT#是大于的含义; 
+END
