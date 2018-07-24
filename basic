@@ -19,3 +19,4 @@ max=@sum(wu(i):p(i)*@sum(cang(j):x(i,j)));
 @for(cang(j):@for(cang(k)|k #GT# j:@sum(wu(i):x(i,j)/WET(j))=@sum(wu(i):x(i,k)/WET(k))) );
 !#GT#是大于的含义; 
 END
+!1-新分区-数学规划-提高.pdf
